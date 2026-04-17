@@ -1,0 +1,232 @@
+@use 'theme';
+@use 'variables' as *;
+@use 'reset';
+@use 'common';
+
+#app {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-primary);
+  background-color: var(--bg-color);
+  transition: background-color var(--transition-duration) var(--transition-ease),
+              color var(--transition-duration) var(--transition-ease);
+}
+
+.el-main {
+  background-color: var(--bg-color);
+  overflow-y: auto;
+}
+
+.page-container {
+  padding: 20px;
+  min-height: calc(100vh - var(--header-height));
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+html.dark {
+  .el-card {
+    --el-card-bg-color: var(--bg-white);
+    --el-card-border-color: var(--border-color);
+  }
+
+  .el-dialog {
+    --el-dialog-bg-color: var(--bg-white);
+  }
+
+  .el-menu {
+    --el-menu-bg-color: var(--bg-white);
+    --el-menu-text-color: var(--text-regular);
+    --el-menu-active-color: var(--color-primary);
+  }
+
+  .el-input__wrapper {
+    background-color: var(--fill-base);
+    box-shadow: 0 0 0 1px var(--border-color) inset;
+  }
+
+  .el-textarea__inner {
+    background-color: var(--fill-base);
+    box-shadow: 0 0 0 1px var(--border-color) inset;
+    color: var(--text-regular);
+  }
+
+  .el-select__wrapper {
+    background-color: var(--fill-base);
+    box-shadow: 0 0 0 1px var(--border-color) inset;
+  }
+
+  .el-pagination {
+    --el-pagination-bg-color: var(--fill-base);
+    --el-pagination-text-color: var(--text-regular);
+    --el-pagination-button-disabled-bg-color: var(--fill-light);
+  }
+
+  .el-table {
+    --el-table-bg-color: var(--bg-white);
+    --el-table-tr-bg-color: var(--bg-white);
+    --el-table-header-bg-color: var(--fill-base);
+    --el-table-row-hover-bg-color: var(--fill-light);
+    --el-table-border-color: var(--border-color);
+    --el-table-text-color: var(--text-regular);
+    --el-table-header-text-color: var(--text-secondary);
+  }
+
+  .el-tag--info {
+    --el-tag-bg-color: var(--fill-base);
+    --el-tag-border-color: var(--border-color);
+    --el-tag-text-color: var(--text-regular);
+  }
+
+  .el-dropdown-menu {
+    background-color: var(--bg-white);
+    border-color: var(--border-color);
+  }
+
+  .el-dropdown-menu__item {
+    color: var(--text-regular);
+    &:hover {
+      background-color: var(--fill-light);
+      color: var(--color-primary);
+    }
+  }
+
+  .el-progress__text {
+    color: var(--text-regular);
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--fill-light) 25%, var(--fill-base) 37%, var(--fill-light) 63%);
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+  border-radius: var(--border-radius-base);
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+.skeleton-text {
+  height: 16px;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.skeleton-title {
+  height: 24px;
+  margin-bottom: 16px;
+  width: 60%;
+}
+
+.skeleton-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.skeleton-image {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--border-radius-lg);
+}
+
+.skeleton-card {
+  padding: 20px;
+  background: var(--bg-white);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-light);
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+[role="button"] {
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html.dark {
+  img {
+    opacity: 0.9;
+    transition: opacity var(--transition-duration) var(--transition-ease);
+  }
+
+  img:hover {
+    opacity: 1;
+  }
+}
+
+
+// 退出弹窗全局样式
+// ElMessageBox 样式修复
+.el-overlay-message-box {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+// 恢复弹框本身的外观样式（被全局 reset 影响）
+.el-message-box {
+  background-color: var(--el-bg-color, #fff) !important;
+  border-radius: var(--el-border-radius-base, 16px) !important;
+  box-shadow: var(--el-box-shadow-light, 0 2px 12px 0 rgba(0,0,0,.1)) !important;
+  border: none !important;
+  padding: 20px !important;
+}
+

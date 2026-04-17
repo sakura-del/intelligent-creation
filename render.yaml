@@ -1,0 +1,56 @@
+services:
+  - type: web
+    name: ai-resume-backend
+    runtime: docker
+    dockerfilePath: ./server/Dockerfile
+    dockerContext: ./server
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 24h
+      - key: JWT_REFRESH_EXPIRES_IN
+        value: 7d
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "4000"
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        value: test
+      - key: DB_SSL
+        value: "true"
+      - key: GLM_API_KEY
+        sync: false
+    disk:
+      name: data
+      mountPath: /app/uploads
+      sizeGB: 1
+    healthCheckPath: /health
+    numInstances: 1
+    plan: free
+
+  - type: web
+    name: ai-resume-frontend
+    runtime: static
+    buildCommand: npm run build
+    staticPublishPath: ./dist
+    pullRequestPreviewsEnabled: true
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://ai-resume-backend.onrender.com/api
+    routes:
+      - type: redirect
+      - type: rewrite
+        source: /api/*
+        destination: https://ai-resume-backend.onrender.com/*
+    plan: free

@@ -1,0 +1,56 @@
+{
+  "name": "ai-resume-server",
+  "version": "1.0.0",
+  "description": "AI智能内容创作平台 - 后端服务",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "migrate": "node database/migrate.js migrate",
+    "seed": "node database/seed.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "lint": "eslint . --ext .js",
+    "setup:tidb": "node scripts/setup-tidb.js",
+    "test:db": "node -e \"import('./database/connection.js').then(m => m.default.testConnection())\"",
+    "health": "curl -s http://localhost:3000/health | node -e \"process.stdin.resume(); let d=''; process.stdin.on('data',c=>d+=c); console.log(JSON.stringify(JSON.parse(d), null, 2))\""
+  },
+  "keywords": [
+    "ai",
+    "resume",
+    "content-generation",
+    "no-code"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@sentry/node": "^10.48.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
+    "joi": "^17.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.6.5",
+    "openai": "^4.24.0",
+    "sharp": "^0.34.5",
+    "uuid": "^9.0.1",
+    "winston": "^3.11.0",
+    "ws": "^8.20.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.2",
+    "supertest": "^6.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

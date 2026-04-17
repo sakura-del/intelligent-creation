@@ -1,0 +1,45 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "3006:3006"
+    env_file:
+      - ./server/.env.production
+    environment:
+      - NODE_ENV=production
+      - PORT=3006
+    volumes:
+      - upload-data:/app/uploads
+      - log-data:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3006/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+    networks:
+      - app-network
+
+volumes:
+  upload-data:
+  log-data:
+
+networks:
+  app-network:
+    driver: bridge

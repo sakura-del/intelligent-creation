@@ -1,0 +1,30 @@
+export default {
+  testEnvironment: 'node',
+  transform: {},
+  moduleFileExtensions: ['js', 'json'],
+  testMatch: ['**/__tests__/**/*.test.js', '**/?(*.)+(spec|test).js'],
+  collectCoverageFrom: [
+    'middleware/**/*.js',
+    'routes/**/*.js',
+    'services/**/*.js',
+    'utils/**/*.js',
+    '!**/node_modules/**',
+    '!**/coverage/**',
+  ],
+  coverageDirectory: 'coverage',
+  coverageReporters: ['text', 'lcov', 'clover'],
+  coverageThreshold: {
+    global: {
+      branches: 40,
+      functions: 50,
+      lines: 50,
+      statements: 50,
+    },
+  },
+  testTimeout: 10000,
+  setupFilesAfterEnv: [],
+  verbose: true,
+  forceExit: true,
+  clearMocks: true,
+  resetMocks: true,
+}
