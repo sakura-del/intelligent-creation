@@ -1,7 +1,26 @@
 {
-  "name": "ai-resume",
-  "version": "0.0.0",
+  "name": "intelligent-creation",
+  "version": "1.0.0",
   "private": true,
+  "description": "AI 智能创作平台 - 融合多种大模型能力，支持内容生成、图片创作、代码工坊和无代码应用搭建",
+  "author": "sakura-del",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sakura-del/intelligent-creation.git"
+  },
+  "keywords": [
+    "ai",
+    "intelligent-creation",
+    "content-generation",
+    "image-generation",
+    "code-studio",
+    "no-code",
+    "vue3",
+    "express",
+    "deepseek",
+    "prompt-engineering"
+  ],
   "type": "module",
   "scripts": {
     "dev": "vite",
